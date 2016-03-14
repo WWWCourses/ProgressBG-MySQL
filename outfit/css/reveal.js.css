@@ -2,6 +2,7 @@
  * IMPORTS
  *********************************************/
  @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css");
+ @import url("https://cdnjs.cloudflare.com/ajax/libs/font-mfizz/2.3.0/font-mfizz.min.css");
  @import url("https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css");
  /*@import url("https://cdn.linearicons.com/free/1.0.0/icon-font.min.css");*/
  @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
@@ -112,7 +113,7 @@ i.img{
   margin: 1.5em .2em 0 .2em;
   font-size: 2em;
   opacity: .5;
-  /*vertical-align: middle;*/
+  vertical-align: bottom;
    /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
