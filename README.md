@@ -1,3 +1,1 @@
-# ProgressBG-MySQL
-
-## Материали за курса
+## Материали за курса по MySQL към ProgressBG
