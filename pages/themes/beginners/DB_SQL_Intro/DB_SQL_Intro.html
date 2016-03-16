@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>cliche</title>
+    <title>DB and SQL Introduction</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -28,11 +28,12 @@
     <!-- CUSTOM -->
     <link rel="stylesheet" href="/ProgressBG-MySQL/outfit/css/reveal.js.css">
     <link rel="stylesheet" type="text/css" href="/ProgressBG-MySQL/outfit/css/custom_hljs.css">
+    <link rel="stylesheet" type="text/css" href="/ProgressBG-MySQL/outfit/css/common/themes/MatDes/text_schemes.css">
     <base target="_blank">
 </head>
 <body>
     <div class="reveal default center" data-transition-speed="default" data-background-transition="default">
-        <a class="home_link" href="../../../agenda/beginners.html#cliche" target="_top"><i class="fa fa-home"></i></a>
+        <a class="home_link" href="../../../agenda/beginners.html#DB_SQL_Intro" target="_top"><i class="fa fa-home"></i></a>
         <div class="footer theme_switch">
             <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/white.css'); return false;">White</a>
             <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/league.css'); return false;">League</a>
@@ -50,7 +51,7 @@
 ##################### SLIDES START #####################
 ########################################################
 -->
-<section><h1>PresentationTitile</h1></section>
+<section><h1>Introduction to DB and SQL</h1></section>
 <section data-transition="zoom">
     <div class="copyright">
         <div class="note">
@@ -68,12 +69,112 @@
     </div>
 </section>
 
-<section><h2>SectionTitle</h2>
+<section><h2>Introduction to DB</h2>
     <section>
-
+        <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/league.css'); return false;">League</a>
+        <dl class="fa">
+            <dt>Definition:</dt>
+                <dd><abbr>DB</abbr><dfn id="DB"><span>Data</span><span>Base</span></dfn></dd>
+                <dd>A structured set of data, organized to provide efficient retrieval.</dd>
+            <dt>Rationale:</dt>
+                <dd>A DB should be able to serve multiple users (clients) simultaneously.</dd>
+                <dd>A DB should be used for more than one task.</dd>
+        </dl>
+    </section>
+    <section>
+        <p>Historical Milestones</p>
+        <dl class="fa">
+            <dt>Early 1960s - <span class="name_product">Integrated Data Store</span> (<span class="name_person">Charles Bachman</span>, <span class="name_company">General Electric</span>)</dt>
+            <dt>Late 1960s - <span class="name_product">Information Management System</span> (<span class="name_company">IBM</span>)</dt>
+                <dd>forms the bases of the <i>hierarchical data model</i></dd>
+            <dt>In 1970 - <span class="name_person">Edgar Codd</span> at <span class="name_company">IBM</span> proposes the <span class="keyconcept">relational data model</span></dt>
+            <dt>In 1980s - the <span class="keyconcept">SQL</span> was developed as part of <span class="name_company">IBM</span>’s <span class="name_product">System R</span> project.</dt>
+            <dt>In 1994 - the <span class="keyconcept">MySQL</span> first internal release, created by <span class="name_person">Michael Widenius</span> and <span class="name_person">David Axmark</span></dt>
+        </dl>
+    </section>
+    <section>
+        <p>DB Evolution</p>
+        <dl class="fa">
+            <dt class="keyconcept">Data warehouse</dt>
+                <dd>Logical collection of information gathered from operational databases.</dd>
+                <dd>Supports business analysis activities and decision making tasks.</dd>
+            <dt class="keyconcept">Data mart.</dt>
+                <dd>Subset of a data warehouse in which only a focused portion of the data warehouse information is kept.</dd>
+            <dt class="keyconcept">Ontologies</dt>
+                <dd>Conceptual representation of world that consists of a set of types, properties, and relationship types.</dd>
+        </dl>
+    </section>
+    <section><h3>Advantages of a DBMS compared to files system storage</h3>
+        <dl class="fa">
+            <dt>Data independence</dt>
+            <dt>Efficient data access</dt>
+            <dt>Data integrity and security</dt>
+            <dt>Centralized data administration</dt>
+            <dt>Concurrent access and crash recovery</dt>
+            <dt>Reduced application development time</dt>
+        </dl>
     </section>
 </section>
 
+<section><h2>Data Models</h2>
+    <section><h3>Definition</h3>
+        <p>A <span class="keyconcept">data model</span> is a collection of high-level data description constructs that hide many low-level storage details.</p>
+    </section>
+    <section><h3>Hierarchical database model</h3>
+        <img src="images/hierarchical-database-model.png">
+        <p>Each child have only one parent.</p>
+    </section>
+    <section><h3>Network database model</h3>
+        <img src="images/network-database-model.png">
+        <p>A child can have multiple parents.</p>
+    </section>
+    <section><h3>Relational database model</h3>
+        <img src="images/relational-database-model.png">
+        <p>The central construct is a relation(table), which can be thought of as a set of tuples (rows) which shares common attributes(columns) .</p>
+    </section>
+    <section><h3>Object-oriented database model</h3>
+        <img src="images/ImpedenceMismatch-OO-Relational1.png">
+    </section>
+    <section><h3>Object-oriented database model</h3>
+        <img src="images/relational_vs_object_model.gif">
+        <p>Ease the modelling of complex data structures with <span class="keyconcept">many-to-many</span> relationships, by <span class="keyconcept">inheritance</span>, <span class="keyconcept">data encapsulation</span></p>
+    </section>
+    <section><h3>Document database model</h3>
+        <img src="images/Match-OO-Document.png">
+        <p>Document databases store data in objects that can be <span class="note">deeply nested</span> and can consist of <span class="note">arbitrary fields</span>.</p>
+    </section>
+</section>
+<section><h2>The Relational Model and SQL</h2>
+    <section><h3>Definition</h3>
+        <dl class="fa">
+            <dt>A database is a collection of one or more <span class="keyconcept">tables</span>, where each tables is a relation between rows and columns.</dt>
+            <dt>A relation consists of a <span class="keyconcept">relation schema</span> and a <span class="keyconcept">relation instance</span>.</dt>
+            <dt><span class="keyconcept">Relation instance</span> - a table with rows and columns.</dt>
+            <dt><span class="keyconcept">Relation schema</span> - describes the column heads for the table.</dt>
+        </dl>
+    </section>
+    <section>
+        <dl class="fa"><h3>Key Concepts</h3>
+            <dt><span class="keyconcept">Relational DataBase</span></dt>
+                <dd>A collection of <span class="keyconcept">tables</span>, with related data.</dd>
+            <dt><span class="keyconcept">Tables</span> - represents a <span class="keyconcept">Relation</span>.</dt>
+                <dd>Consists of rows and columns, like a simple spreadsheet.</dd>
+                <dd>Each table is a set of <span class="note">unique</span> rows.</dd>
+            <dt><span class="keyconcept">Row</span> (Tuple, Record)</dt>
+                <dd>Represents a collection of related values of entity.</dd>
+            <dt><span class="keyconcept">Column</span> </dt>
+                <dd>One column contains data of one and the same type, as defined in schema.</dd>
+        </dl>
+    </section>
+    <section><h3>ExampleDatabase</h3>
+        <dl>
+            <dt>Download</dt>
+                <dd><a href="https://github.com/datacharmer/test_db">Employees Sample Database</a></dd>
+            <dt>Install</dt>
+                <dd><code>mysql -u root -p < employees.sql</code></dd>
+        </dl>
+    </section>
+</section>
 <section data-background="/ProgressBG-MySQL/outfit/images/for_slides/the_end_on_sand.jpg">
     <!-- <img class="the_end" src="/ProgressBG-MySQL/outfit/images/for_slides/the_end_on_sand.jpg"> -->
 </section>
