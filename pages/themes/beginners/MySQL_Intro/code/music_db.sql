@@ -20,5 +20,5 @@ CREATE TABLE track (
   album_id SMALLINT(4) NOT NULL DEFAULT 0,
   track_name CHAR(128) DEFAULT NULL,
   time DECIMAL(5,2) DEFAULT NULL,
-  PRIMARY KEY  (artist_id,album_id, ,m)
+  PRIMARY KEY  (artist_id, album_id, track_id)
 );
