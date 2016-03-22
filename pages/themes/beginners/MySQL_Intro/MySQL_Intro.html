@@ -28,10 +28,11 @@
     <!-- CUSTOM -->
     <link rel="stylesheet" href="/ProgressBG-MySQL/outfit/css/reveal.js.css">
     <link rel="stylesheet" type="text/css" href="/ProgressBG-MySQL/outfit/css/custom_hljs.css">
+    <link rel="stylesheet" type="text/css" href="/ProgressBG-MySQL/outfit/css/common/themes/MatDes/text_schemes.css">
     <style type="text/css">
         .slides section pre>code{
-            font-size: 2em;
-            line-height: 1em;
+            font-size: 1.5em;
+            line-height: 1.5em;
         }
     </style>
     <base target="_blank">
@@ -78,6 +79,11 @@
         <pre><code>
 mysql -u user_name -p [db_name] < text_file
         </code></pre>
+        <ul>
+            <li><span class="note">[db_name]</span> is optional (if not set, you can 'use db_name' later)</li>
+            <li><span class="note">text_file</span> is an ASCII file, which contains SQL statements</li>
+        </ul>
+
     </section>
     <section><h3>In MySQL client</h3>
         <pre><code>
@@ -90,6 +96,7 @@ mysql> source file_name
         <pre><code>
 SHOW DATABASES;
         </code></pre>
+        <p class="note">Lists only those databases for which the user have some kind of privilege (or if the user have the global SHOW DATABASES privilege).</p>
     </section>
     <section><h3>Create DB</h3>
         <pre><code>
@@ -105,6 +112,7 @@ DROP DATABASE music_db;
         <pre><code>
 USE music_db;
         </code></pre>
+        <p>Before performing any table manipulations, you need to select the database on which they will be performed.</p>
     </section>
 </section>
 <section><h2>Manage users</h2>
@@ -112,11 +120,13 @@ USE music_db;
         <pre><code>
 CREATE USER 'music_db_admin'@'localhost' IDENTIFIED BY '1234';
         </code></pre>
+        <p>If user exists, an error will be thrown.</p>
     </section>
     <section><h3>Delete user</h3>
         <pre><code>
 DROP USER 'music_db_admin'@'localhost';
         </code></pre>
+        <p>If user did not exists, an error will be thrown.</p>
     </section>
     <section><h3>User privileges types</h3>
         <dl class="fa">
@@ -131,7 +141,10 @@ DROP USER 'music_db_admin'@'localhost';
         </dl>
     </section>
     <section><h3>Grant privileges to a user</h3>
-        <pre><code>GRANT [type of permission] ON [database name].[table name] TO ‘[username]’@'host’;</code></pre>
+        <code>
+GRANT [type of permission]
+    ON [database name].[table name]
+    TO ‘[username]’@'host’;</code>
         <p></p>
         <pre><code>
 GRANT ALL PRIVILEGES ON music_db.* TO 'music_db_admin'@'localhost';
@@ -146,47 +159,92 @@ GRANT ALL PRIVILEGES ON music_db.* TO 'music_db_admin'@'localhost';
 FLUSH PRIVILEGES;
         </code></pre>
     </section>
-    <section><h3>Show al users</h3>
+    <section><h3>Show all users</h3>
         <pre><code>
-select * from mysql.user;
+SELECT user FROM mysql.user;
         </code></pre>
     </section>
 </section>
 <section><h2>Manage tables</h2>
-    <section><h3>Create table</h3>
-       <pre><code>
-CREATE TABLE artists (
-  fname VARCHAR(20) NOT NULL,
-  lname VARCHAR(20) DEFAULT NULL,
-  PRIMARY KEY (fname)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    <section><h3>Create table - minimal syntax</h3>
+        <pre><code>
+CREATE TABLE table_name(
+    column_name1 data_type,
+    column_name2 data_type,
+    ....
+);
         </code></pre>
+        <p>Column names should not be MySQL <a href="https://dev.mysql.com/doc/refman/5.6/en/keywords.html" class="note">reserved words</a>. If you really want to use them (which is a <span class="note">bad practice</span>), you have to put them in backticks(``)</p>
+    </section>
+    <section><h3>Create table - example</h3>
+        <pre><code>
+CREATE TABLE artist (
+  artist_id SMALLINT(5) NOT NULL DEFAULT 0,
+  fname VARCHAR(20) DEFAULT NULL,
+  lname VARCHAR(20) NOT NULL,
+  PRIMARY KEY  (artist_id)
+);
+        </code></pre>
+        <p>Results in:</p>
+        <pre><code class="basic">
+Query OK, 0 rows affected
+Time: 0.280s
+        </code></pre>
+        <p>If table exists an error will be thrown!</p>
     </section>
     <section><h3>List All Tables</h3>
         <pre><code>
 SHOW TABLES;
         </code></pre>
+        <p>Results in:</p>
+        <pre><code>
++----------------------+
+| Tables_in_music_db   |
+|----------------------|
+| artist               |
++----------------------+
+        </code></pre>
     </section>
     <section><h3>Show Table Structure</h3>
         <pre><code>
-DESC artists;
+DESC artist;
+        </code></pre>
+        <p>Results in:</p>
+        <pre><code>
+
++-----------+-------------+--------+-------+-----------+---------+
+| Field     | Type        | Null   | Key   |   Default | Extra   |
+|-----------+-------------+--------+-------+-----------+---------|
+| artist_id | smallint(5) | NO     | PRI   |         0 |         |
+| fname     | varchar(20) | YES    |       |    &lt;null&gt; |         |
+| lname     | varchar(20) | NO     |       |    &lt;null&gt; |         |
++-----------+-------------+--------+-------+-----------+---------+
         </code></pre>
     </section>
     <section><h3>Delete a Table</h3>
         <pre><code>
-DROP TABLE;
+DROP TABLE artist;
+        </code></pre>
+        <p>If table do not exists, an error is thrown:</p>
+        <pre><code>
+ERROR 1051 (42S02): Unknown table 'music_db.artist'
         </code></pre>
     </section>
     <section><h3>Modify a Table - Add a Column</h3>
         <pre><code>
-ALTER TABLE artists
-    ADD birth_date TINYINT;
-    AFTER lname;a
+ALTER TABLE table_name
+  ADD new_column_name column_definition
+  [ FIRST | AFTER column_name ]; # optional
+        </code></pre>
+        <pre><code>
+ALTER TABLE artist
+    ADD birth_date TINYINT
+    AFTER lname;
         </code></pre>
     </section>
     <section><h3>Modify a Table - Remove a Column</h3>
         <pre><code>
-ALTER TABLE artists DROP birth_date;
+ALTER TABLE artist DROP birth_date;
         </code></pre>
     </section>
 </section>
