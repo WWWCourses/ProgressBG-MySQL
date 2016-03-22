@@ -91,7 +91,7 @@ mysql> source file_name
         </code></pre>
     </section>
 </section>
-<section><h2>Manage databases</h2>
+<section id="Manage_databases"><h2>Manage databases</h2>
     <section><h3>List All Databases</h3>
         <pre><code>
 SHOW DATABASES;
@@ -115,7 +115,7 @@ USE music_db;
         <p>Before performing any table manipulations, you need to select the database on which they will be performed.</p>
     </section>
 </section>
-<section><h2>Manage users</h2>
+<section id="Manage_users"><h2>Manage users</h2>
     <section><h3>Create a New User</h3>
         <pre><code>
 CREATE USER 'music_db_admin'@'localhost' IDENTIFIED BY '1234';
@@ -165,7 +165,7 @@ SELECT user FROM mysql.user;
         </code></pre>
     </section>
 </section>
-<section><h2>Manage tables</h2>
+<section id="Manage_tables"><h2>Manage tables</h2>
     <section><h3>Create table - minimal syntax</h3>
         <pre><code>
 CREATE TABLE table_name(
@@ -261,6 +261,15 @@ ALTER TABLE artist DROP birth_date;
             <dt>Create user <span class="note">music_db_admin</span> with full privileges on <span class="note">music_db</span>.</dt>
             <dt>Create user <span class="note">music_db_editor</span> who will be able <u>only</u> to read, insert and update the content of all tables in <span class="note">music_db</span>.</dt>
             <dt>Create user <span class="note">music_db_reader</span> who will be able <u>only</u> to read, the content of all tables in <span class="note">music_db</span>.</dt>
+        </dl>
+    </section>
+    <section><h3>Connect to MySQL server with different user</h3>
+        <dl class="fa">
+            <dt>Connect to MySQL server as <span class="note">music_db_admin</span></dt>
+                <dd>Try to execute the statements learned in <a href="#Manage_tables">Manage tables section</a> and <a href="#Manage_databases">Manage databases section</a></dd>
+            <dt>Connect to MySQL server as <span class="note">music_db_editor</span> or <span class="note">music_db_reader</span></dt>
+                <dd>Try to execute the statements learned in <a href="#Manage_tables">Manage tables section</a> and <a href="#Manage_databases">Manage databases section</a></dd>
+            <dt>Write down what the MySQL server response to each of your commands.</dt>
         </dl>
     </section>
     <section><h3>Create table as music_db_admin</h3>
