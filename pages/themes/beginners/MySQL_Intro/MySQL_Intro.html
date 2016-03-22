@@ -248,6 +248,40 @@ ALTER TABLE artist DROP birth_date;
         </code></pre>
     </section>
 </section>
+<section><h2>Exercises</h2>
+    <section><h3>Create DB schema dumped in external file</h3>
+        <dl class="fa">
+        <dt>Create a simple DB: music_db, using the SQL statements provided in the file <a href="code/music_db.sql">music_db.sql</a>.</dt>
+            <dd>You can use the MySQL Workbench to dump the statements by: <code>'File' => 'Run SQL script...' and selecting the 'music_db.sql' file you have downloaded</code>.
+            </dd>
+        </dl>
+    </section>
+    <section><h3>Create users</h3>
+        <dl class="fa">
+            <dt>Create user <span class="note">music_db_admin</span> with full privileges on <span class="note">music_db</span>.</dt>
+            <dt>Create user <span class="note">music_db_editor</span> who will be able <u>only</u> to read, insert and update the content of all tables in <span class="note">music_db</span>.</dt>
+            <dt>Create user <span class="note">music_db_reader</span> who will be able <u>only</u> to read, the content of all tables in <span class="note">music_db</span>.</dt>
+        </dl>
+    </section>
+    <section><h3>Create table as music_db_admin</h3>
+        <dl class="fa">
+            <dt>Reconnect to the <span class="note">music_db</span> as <span class="note">music_db_admin</span> user.</dt>
+            <dt>Create new table <span class="note">producer</span> with following scheme:</dt>
+            <pre><code>
++---------------+-------------+------+-----+---------+
+| Field         | Type        | Null | Key | Default |
++---------------+-------------+------+-----+---------+
+| producer_id   | smallint(5) | NO   | PRI | 0       |
+| artist_id     | smallint(5) | NO   | PRI | 0       |
+| album_id      | smallint(5) | NO   | PRI | 0       |
+| fname         | varchar(20) | YES  |     | NULL    |
+| lname         | varchar(20) | NO   |     | NULL    |
+| current_label | varchar(20) | YES  |     | NULL    |
++---------------+-------------+------+-----+---------+
+            </code></pre>
+        </dl>
+    </section>
+</section>
 
 
 <section data-background="/ProgressBG-MySQL/outfit/images/for_slides/the_end_on_sand.jpg">
