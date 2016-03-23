@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>MySQL_Data_Types</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <!-- css & themes include -->
+    <link rel="stylesheet" href="/ProgressBG-MySQL/lib/reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="/ProgressBG-MySQL/lib/reveal.js/css/theme/league.css" id="theme">
+    <!-- Code syntax highlighting -->
+    <!-- <link rel="stylesheet" href="/ProgressBG-MySQL/lib/reveal.js/lib/css/zenburn.css"> -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/obsidian.min.css">
+    <!--DARK:  tomorrow-night/monokai-sublime/obsidian/tomorrow-night-eighties/ -->
+    <!-- LIGHT:tomorrow/ -->
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? '/ProgressBG-MySQL/lib/reveal.js/css/print/pdf.css' : '/ProgressBG-MySQL/lib/reveal.js/css/print/paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+    <!-- CUSTOM -->
+    <!-- CUSTOM -->
+    <link rel="stylesheet" href="/ProgressBG-MySQL/outfit/css/reveal.js.css">
+    <link rel="stylesheet" type="text/css" href="/ProgressBG-MySQL/outfit/css/custom_hljs.css">
+    <link rel="stylesheet" type="text/css" href="/ProgressBG-MySQL/outfit/css/common/themes/MatDes/text_schemes.css">
+    <base target="_blank">
+</head>
+<body>
+    <div class="reveal default center" data-transition-speed="default" data-background-transition="default">
+        <a class="home_link" href="../../../agenda/beginners.html#MySQL_Data_Types" target="_top"><i class="fa fa-home"></i></a>
+        <div class="footer theme_switch">
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/white.css'); return false;">White</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/league.css'); return false;">League</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/sky.css'); return false;">Sky</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/beige.css'); return false;">Beige</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/simple.css'); return false;">Simple</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/serif.css'); return false;">Serif</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/night.css'); return false;">Night</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/moon.css'); return false;">Moon</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/solarized.css'); return false;">Solarized</a>
+        </div>
+        <div class="slides">
+<!--
+########################################################
+##################### SLIDES START #####################
+########################################################
+-->
+<section><h1>MySQL Data Types</h1></section>
+<section data-transition="zoom">
+    <div class="copyright">
+        <div class="note">
+            <p>Created for</p>
+        </div>
+        <div class="company">
+            <a href="http://progressbg.net/kurs-po-web-design/">
+            <img style="height:80%" src="/ProgressBG-MySQL/outfit/images/logos/ProgressBG_logo_529_127.png">
+            </a>
+        </div>
+        <div class="author">
+            <span>Iva E. Popova, 2016,</span>
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+        </div>
+    </div>
+</section>
+
+<section><h2>Numeric Types</h2>
+    <section>
+        <a href="http://dev.mysql.com/doc/refman/5.7/en/numeric-type-overview.html">Numeric Type Overview</a>
+    </section>
+    <section><h4>Integer Types - Overview</h4>
+        <dl class="fa">
+            <dt>SQL standard integer types:</dt>
+                <dd>INTEGER (or INT)</dd>
+                <dd>SMALLINT</dd>
+            <dt>MySQL extension:</dt>
+                <dd>TINYINT</dd>
+                <dd>MEDIUMINT</dd>
+                <dd>BIGINT</dd>
+        </dl>
+    </section>
+    <section><h3>Integer Types - Comparison Table</h3>
+        <img src="images/IntegerDataTypes.png">
+    </section>
+    <section><h4>Integer Types - Examples</h4>
+        <p>Create integer_datatypes table</p>
+        <pre><code>
+CREATE TABLE IF NOT EXISTS integer_datatypes(
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  tinyint_data tinyint(4) DEFAULT NULL,
+  smallint_data smallint(6) DEFAULT NULL,
+  mediumint_data mediumint(9) DEFAULT NULL,
+  int_data int(11) DEFAULT NULL,
+  bigint_data bigint(20) DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+     </code></pre>
+        <p>And now insnert some numeric data</p>
+        <pre><code>
+INSERT INTO integer_datatypes (tinyint_data,smallint_data,mediumint_data,int_data,bigint_data )
+VALUES (100, 20000, 3000000, 100000000, 10000000000000000 );
+        </code></pre>
+    </section>
+
+    <section><h3>Fixed-Point Types</h3>
+        <a href="http://dev.mysql.com/doc/refman/5.7/en/fixed-point-types.html">Fixed-Point Types</a>
+    </section>
+    <section><h3>Floating-Point Types</h3>
+        <a href="http://dev.mysql.com/doc/refman/5.7/en/floating-point-types.html">Floating-Point Types</a>
+    </section>
+
+    <section><h3>Numeric Type Attributes</h3>
+        <dl class="fa">
+            <dt><span class="note">(X)</span> - an optional extension in parentheses following the base keyword for the type, which specifies the display width of integer data types.</dt>
+            <dt><span class="note">ZEROFILL</span> - when used in conjunction with the optional (nonstandard) attribute ZEROFILL, the default padding of spaces is replaced with zeros. For example, for a column declared as <code>INT(4) ZEROFILL</code>, a value of 3 is retrieved as 0003.</dt>
+        </dl>
+    </section>
+</section>
+
+<section><h2>Date and Time Types</h2>
+    <section>
+
+    </section>
+</section>
+
+<section><h2>String Types</h2>
+    <section>
+
+    </section>
+</section>
+
+<section><h2>The JSON Data Type</h2>
+    <section>
+
+    </section>
+</section>
+
+<section data-background="/ProgressBG-MySQL/outfit/images/for_slides/the_end_on_sand.jpg">
+    <!-- <img class="the_end" src="/ProgressBG-MySQL/outfit/images/for_slides/the_end_on_sand.jpg"> -->
+</section>
+<!--
+########################################################
+##################### SLIDES END   #####################
+########################################################
+-->
+        </div>
+    </div>
+    <!-- external scripts -->
+    <script src="/ProgressBG-MySQL/lib/reveal.js/lib/js/head.min.js"></script>
+    <script src="/ProgressBG-MySQL/lib/reveal.js/js/reveal.js"></script>
+     <!-- init reveal -->
+    <script>
+        // Full list of configuration options available at:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            slideNumber: 'c/t',
+            keyboard: true,
+            history: true,
+            center: true,
+            width: 1024,
+            height: 850,
+            // Bounds for smallest/largest possible scale to apply to content
+            // minScale: .5,
+            maxScale: 1,
+            // slide transition
+            transition: 'concave', // none/fade/slide/convex/concave/zoom
+            // Factor of the display size that should remain empty around the content
+            margin: 0.1,
+            // shift+maous click to zoom in/out element
+            zoomKey: 'ctrl',
+            // theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+            // transition: Reveal.getQueryHash().transition || 'default'
+            // Optional reveal.js plugins
+            dependencies: [
+                { src: '/ProgressBG-MySQL/lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                { src: '/ProgressBG-MySQL/lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: '/ProgressBG-MySQL/lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: '/ProgressBG-MySQL/lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                { src: '/ProgressBG-MySQL/lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+                { src: '/ProgressBG-MySQL/lib/reveal.js/plugin/notes/notes.js', async: true }
+            ]
+        });
+    </script>
+</body>
+</html>
