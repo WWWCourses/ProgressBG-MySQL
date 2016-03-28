@@ -52,3 +52,7 @@ abbr+dfn>span:first-letter{
     color: #C5E1A5;
     font-weight: bold;
 }
+.code{
+    font-family: monospace;
+    color: #BAFFF5;
+}

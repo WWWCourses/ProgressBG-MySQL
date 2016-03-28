@@ -261,6 +261,25 @@ mysql>
             </code></pre>
         </dl>
     </section>
+    <section><h3>MySQL server - conf files</h3>
+        <dl class="fa">
+            <dt>Configuration file</dt>
+                <dd><span class="code">my.ini</span> under Windows, <span class="code">my.cnf</span> under Linux</dd>
+                <dd>To find location execute: <span class="code">mysqld --help --verbose</span> and find the list of paths behind the line 'Default options are read from the following files in the given order:'</dd>
+        </dl>
+    </section>
+    <section><h3>MySQL server - where my DB are stored?</h3>
+        <dl class="fa">
+            <dt>Find the value of <span class="code">datadir</span> variable.</dt>
+            <dd>In a mysql client (logged as root) execute:
+                <pre><code>
+SHOW VARIABLES;
+                </code></pre>
+            </dd>
+            <dd>Or check the datadir value in MySQL conf file.</dd>
+            <dd>You can also change the path in MySQL conf file.</dd>
+        </dl>
+    </section>
     <section><h3>Инсталиране на Apache 2.4 под Windows</h3>
         <ol class="fa">
             <li><a href="https://www.apachelounge.com/download/VC14/binaries/httpd-2.4.18-win64-VC14.zip">Apache Lounge Binaries - 64bit version</a></li>

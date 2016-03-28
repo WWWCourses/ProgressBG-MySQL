@@ -74,7 +74,7 @@
     <section>
         <a href="http://dev.mysql.com/doc/refman/5.7/en/numeric-type-overview.html">Numeric Type Overview</a>
     </section>
-    <section><h4>Integer Types - Overview</h4>
+    <section><h3>Integer Types - Overview</h3>
         <dl class="fa">
             <dt>SQL standard integer types:</dt>
                 <dd>INTEGER (or INT)</dd>
@@ -88,7 +88,7 @@
     <section><h3>Integer Types - Comparison Table</h3>
         <img src="images/IntegerDataTypes.png">
     </section>
-    <section><h4>Integer Types - Examples</h4>
+    <section><h3>Integer Types - Examples</h3>
         <p>Create integer_datatypes table</p>
         <pre><code>
 CREATE TABLE IF NOT EXISTS integer_datatypes(
@@ -109,6 +109,11 @@ VALUES (100, 20000, 3000000, 100000000, 10000000000000000 );
     </section>
 
     <section><h3>Fixed-Point Types</h3>
+        <dl class="fa">
+            <dt>DECIMAL</dt>
+                <dd>Standard SQL requires that DECIMAL(5,2) be able to store any value with five digits and two decimals, so values that can be stored in the salary column range from -999.99 to 999.99.</dd>
+
+        </dl>
         <a href="http://dev.mysql.com/doc/refman/5.7/en/fixed-point-types.html">Fixed-Point Types</a>
     </section>
     <section><h3>Floating-Point Types</h3>
@@ -123,24 +128,136 @@ VALUES (100, 20000, 3000000, 100000000, 10000000000000000 );
     </section>
 </section>
 
-<section><h2>Date and Time Types</h2>
-    <section>
-
-    </section>
-</section>
-
 <section><h2>String Types</h2>
-    <section>
-
+    <section><h3>The CHAR Data Type</h3>
+        <dl class="fa">
+            <dt><span class="code">CHAR(M)</span></dt>
+                <dd>Can store <span class="note">fixed</span> length strings.</dd>
+                <dd>The length is specified by M (defaults to 1).</dd>
+                <dd>The length can be any value from <span class="note">0</span> to <span class="note">255</span>.</dd>
+                <dd>If a value entered is with length < M, then<br>the string is <span class="note">right</span> padded with spaces.</dd>
+            <dt>Examples:</dt>
+                <pre><code>
+first_name CHAR(4),
+                </code></pre>
+                <dd>Defines that <span class="code">first_name</span> column will contains 4 character strings.</dd>
+        </dl>
+    </section>
+    <section><h3>The VARCHAR Data Type</h3>
+        <dl class="fa">
+            <dt><span class="code">VARCHAR(M)</span></dt>
+                <dd>Can store <span class="note">variable</span> length strings.</dd>
+                <dd>The length is specified by M - <span class="note">cannot by empty</span>!</dd>
+                <dd>The length can be any value from <span class="note">0</span> to <span class="note">65,535</span>.</dd>
+                <dd>VARCHAR values are stored as a 1-byte or 2-byte length <span class="note">prefix</span> plus data. The length prefix indicates the number of bytes in the value. A column uses one length byte if values require no more than 255 bytes, two length bytes if values may require more than 255 bytes.</dd>
+            <dt>Examples:</dt>
+                <pre><code>
+short_notes VARCHAR(50000),
+                </code></pre>
+                <dd>Defines that <span class="code">short_notes</span> column will contains 50000 character strings.</dd>
+                <dd>The real size taken on disk will be 50000+2 bytes.</dd>
+        </dl>
+    </section>
+    <section><h3>CHAR<->VARCHAR differences</h3>
+        <img src="images/CHAR_VARCHAR_diff.png">
+    </section>
+    <section><h3>BLOB and TEXT Data Types</h3>
+        <dl class="fa">
+            <dt><abbr>BLOB</abbr><dfn><span>Binary</span> <span>Large</span> <span>O</span><span>Bject</span></dfn></dt>
+                <dd>Stores large amounts of binary data, such as images, PDF or other types of files.</dd>
+                <dd>BLOB values are treated as binary strings - they have no character set!</dd>
+            <dt><span class="code">TEXT</span></dt>
+                <dd>TEXT values are treated as character strings - they have a character set!</dd>
+        </dl>
+    </section>
+    <section><h3>TINYBLOB or TINYTEXT</h3>
+        <dl class="fa">
+            <dt>BLOB or TEXT column with a maximum length of <span class="note">255</span> characters.</dt>
+            <dt>You do not specify a length with TINYBLOB or TINYTEXT.</dt>
+        </dl>
+    </section>
+    <section><h3>MEDIUMBLOB or MEDIUMTEXT</h3>
+        <dl class="fa">
+            <dt>BLOB or TEXT column with a maximum length of <span class="note">16,777,215</span> characters.</dt>
+            <dt>You do not specify a length with MEDIUMBLOB or MEDIUMTEXT.</dt>
+        </dl>
+    </section>
+    <section><h3>LONGBLOB or LONGTEXT</h3>
+        <dl class="fa">
+            <dt>BLOB or TEXT column with a maximum length of <span class="note">4,294,967,295</span> characters.</dt>
+            <dt>You do not specify a length with LONGBLOB or LONGTEXT.</dt>
+        </dl>
+    </section>
+    <section><h3>ENUM</h3>
+        <dl class="fa">
+            <dt><span class="code">ENUM</span> (from ENUMeration)</dt>
+            <dt>Defines a <span class="note">list</span> of items. Like: ('yes', 'no')</dt>
+            <dt>The value entered must be selected from that list (or it can be NULL)</dt>
+            <dt>The elements listed in the column specification are assigned index numbers, beginning with <span class="note">1</span></dt>
+            <dt>Pros:</dt>
+                <dd>Compact data storage in situations where a column has a limited set of possible values.</dd>
+        </dl>
+        <p>Example</p>
+            <pre><code>
+smoker ENUM('yes','no'),
+            </code></pre>
     </section>
 </section>
+
+<section><h2>Date and Time Types</h2>
+    <section><h3>The DATE Date Type</h3>
+        <dl class="fa">
+            <dt>A date in <span class="code">YYYY-MM-DD</span> format</dt>
+            <dt>Values range: between <span class="code">1000-01-01</span> and <span class="code">9999-12-31</span>.</dt>
+            <dt>A date can be entered in several formats.</dt>
+                <dd><code>'YYYY-MM-DD'</code> or <code>'YY-MM-DD'</code>, like '2016-03-28' or '16-03-28'</dd>
+            <dt>Any punctuation character may be used as the delimiter between date parts.</dt>
+                <dd>'2016/03/28' or '16/03/28'</dd>
+        </dl>
+    </section>
+    <section><h3>The DATETIME Date Type</h3>
+        <dl class="fa">
+            <dt>A date and time in <span class="code">YYYY-MM-DD HH:MM:SS</span> format</dt>
+            <dt>Values range: between <span class="code">1000-01-01 00:00:00</span> and <span class="code">9999-12-31 23:59:59</span>.</dt>
+            <dt>A DATETIME can be entered in several formats.</dt>
+                <dd><code>'YYYY-MM-DD HH:MM:SS'</code> or <code>'YY-MM-DD HH:MM:SS'</code>, like '2016-03-28 09:54:10' or '16-03-28 09:54:10'</dd>
+            <dt>Any punctuation character may be used as the delimiter between date parts.</dt>
+                <dd>'2016/03/28 09.54.10' or '16/03/28 09.54.10'</dd>
+            <dt>The date and time parts can be separated by T rather than a space.</dt>
+                <dd>'2016-03-28 09:54:10' and '2016-03-28T09:54:10' are equivalent.</dd>
+        </dl>
+    </section>
+    <section><h3>The TIMESTAMP Date Type</h3>
+        <dl class="fa">
+            <dt>A date and time in <span class="code">YYYY-MM-DD HH:MM:SS</span> format</dt>
+            <dt>Values range: between <span class="code">1970-01-01 00:00:01</span> UTC and <span class="code">2038-01-19 03:14:07</span> UTC.</dt>
+            <dt>MySQL converts TIMESTAMP values from the current time zone to UTC for storage, and back from UTC to the current time zone for retrieval</dt>
+                <dd>By default, the current time zone for each connection is the <span class="note">server</span> time.</dd>
+            <dt>A TIMESTAMP value can be inserted in MYSQL the same way as a DATETIME value.</dt>
+        </dl>
+    </section>
+    <section><h3>The TIME Date Type</h3>
+        <dl class="fa">
+            <dt>A time in <span class="code">HH:MM:SS</span> format</dt>
+            <dt>Values range: between <span class="code">-838:59:59</span> UTC and <span class="code">838:59:59</span> UTC.</dt>
+            <dt>Can represent a time, or time interval.</dt>
+            <dt>Can be inserted As a string in 'D HH:MM:SS' format. You can also use one of the following “relaxed” syntaxes: 'HH:MM:SS', 'HH:MM', 'D HH:MM', 'D HH', or 'SS'. Here D represents days and can have a value from 0 to 34.</dt>
+        </dl>
+    </section>
+</section>
+
+
 
 <section><h2>The JSON Data Type</h2>
     <section>
 
     </section>
 </section>
-
+<section><h2>References</h2>
+    <dl class="fa">
+        <dt><a href="http://dev.mysql.com/doc/refman/5.7/en/storage-requirements.html">MySQL 5.7 Reference Manual - Data Type Storage Requirements</a></dt>
+    </dl>
+</section>
 <section data-background="/ProgressBG-MySQL/outfit/images/for_slides/the_end_on_sand.jpg">
     <!-- <img class="the_end" src="/ProgressBG-MySQL/outfit/images/for_slides/the_end_on_sand.jpg"> -->
 </section>

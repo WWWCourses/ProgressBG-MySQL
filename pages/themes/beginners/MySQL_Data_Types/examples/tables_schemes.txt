@@ -1,0 +1,15 @@
+
+Table: real_data
+-----------------------------------
+column_name      : type
+-----------------:-----------------
+fixed_point_data : FLOAT(5,2);
+float_data       : FLOAT(5,2);
+double_data      : DOUBLE(10,5);
+-----------------------------------
+
+INSERT INTO table_name (col1, col2)
+VALUES ( 10000.5, 20.80);
+
+fixed_point_data DECIMAL(5,2),
+
