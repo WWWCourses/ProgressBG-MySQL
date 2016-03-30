@@ -74,7 +74,7 @@
     <section><h3>The syntax</h3>
         <pre><code>
 INSERT INTO table_name [(column, ...)]
-VALUES (value, ...), (...), ...;
+VALUES (value, ...)[, (...), ...];
         </code></pre>
         <dl class="fa">
             <dt>Column list is optional!</dt>
@@ -169,6 +169,35 @@ Query OK, 2 rows affected
 </section>
 <section><h3>Comparison Functions and Operators</h3>
     <a href="http://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html">Comparison Functions and Operators</a>
+</section>
+<section><h3>Exercises</h3>
+<ol>
+    <li>CONNECT TO MySQL as ROOT</li>
+    <li>CRETE DB: books_db</li>
+    <li>CREATE books_db_admin;</li>
+    <li>GRANT ALL PRIVILEGES ON ...</li>
+    <li>CONNECT to books_db as books_db_admin</li>
+    <li>CREATE TABLE :</li>
+</ol>
+</section>
+<section><h3>Exercises</h3>
+<p>table: book</p>
+<pre>
+----------------
+id (primary key, auto_increment)
+author_id,
+book_name,
+pub_year;
+</pre>
+
+<p>table: author</p>
+<pre>
+----------------
+id (primary key, auto_increment)
+fname,
+lname,
+birth_year;
+</pre>
 </section>
 
 <section data-background="/ProgressBG-MySQL/outfit/images/for_slides/the_end_on_sand.jpg">
