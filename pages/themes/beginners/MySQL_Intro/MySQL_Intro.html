@@ -211,7 +211,6 @@ DESC artist;
         </code></pre>
         <p>Results in:</p>
         <pre><code>
-
 +-----------+-------------+--------+-------+-----------+---------+
 | Field     | Type        | Null   | Key   |   Default | Extra   |
 |-----------+-------------+--------+-------+-----------+---------|
@@ -220,6 +219,25 @@ DESC artist;
 | lname     | varchar(20) | NO     |       |    &lt;null&gt; |         |
 +-----------+-------------+--------+-------+-----------+---------+
         </code></pre>
+    </section>
+    <section><h3>Show CREATE TABLE</h3>
+        <pre><code>
+show CREATE TABLE artist\G
+        </code>
+'\G' modifier is used instead of ';' to display wide results in vertical form
+        </pre>
+        <p>Results in:</p>
+        <pre><code>
+***************************[ 1. row ]***************************
+Table        | artist
+Create Table | CREATE TABLE `artist` (
+  `artist_id` smallint(5) NOT NULL DEFAULT '0',
+  `fname` varchar(20) DEFAULT NULL,
+  `lname` varchar(20) NOT NULL,
+  PRIMARY KEY (`artist_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+        </code></pre>
+        <p>This allows us to see the create statement that MySQL engine had used. It shows even the default options, which we did not state explicitly.</p>
     </section>
     <section><h3>Delete a Table</h3>
         <pre><code>
@@ -252,7 +270,7 @@ ALTER TABLE artist DROP birth_date;
     <section><h3>Create DB schema dumped in external file</h3>
         <dl class="fa">
         <dt>Create a simple DB: music_db, using the SQL statements provided in the file <a href="code/music_db.sql">music_db.sql</a>.</dt>
-            <dd>You can use the MySQL Workbench to dump the statements by: <code>'File' => 'Run SQL script...' and selecting the 'music_db.sql' file you have downloaded</code>.
+            <dd>You can use the MySQL Workbench to execute the statements by: <code>'File' => 'Run SQL script...' and selecting the 'music_db.sql' file you have downloaded</code>.
             </dd>
         </dl>
     </section>
@@ -265,9 +283,9 @@ ALTER TABLE artist DROP birth_date;
     </section>
     <section><h3>Connect to MySQL server with different user</h3>
         <dl class="fa">
-            <dt>Connect to MySQL server as <span class="note">music_db_admin</span></dt>
+            <dt>Connect to MySQL server as <span class="important">music_db_admin</span></dt>
                 <dd>Try to execute the statements learned in <a href="#Manage_tables">Manage tables section</a> and <a href="#Manage_databases">Manage databases section</a></dd>
-            <dt>Connect to MySQL server as <span class="note">music_db_editor</span> or <span class="note">music_db_reader</span></dt>
+            <dt>Connect to MySQL server as <span class="important">music_db_editor</span> or <span class="important">music_db_reader</span></dt>
                 <dd>Try to execute the statements learned in <a href="#Manage_tables">Manage tables section</a> and <a href="#Manage_databases">Manage databases section</a></dd>
             <dt>Write down what the MySQL server response to each of your commands.</dt>
         </dl>
