@@ -25,8 +25,13 @@ VALUES ( 12345.12, 1.256, 1000000.2000);
 
 ### ~~~ string_datatypes ~~~
 CREATE TABLE IF NOT EXISTS string_datatypes(
+<<<<<<< HEAD
     id                  int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
     char_data           CHAR(255) DEFAULT CURRENT_TIMESTAMP(),
+=======
+    id int(10)          unsigned NOT NULL AUTO_INCREMENT,
+    char_data           CHAR(255),
+>>>>>>> gh-pages
     varchar_data        VARCHAR(50000),
     text_data           TEXT,
     blob_data           BLOB,
@@ -42,7 +47,10 @@ CREATE TABLE IF NOT EXISTS date_and_time_datatypes(
     date_data           DATE,
     datetime_data       DATETIME,
     timestamp_data      TIMESTAMP,
+<<<<<<< HEAD
     time_data           TIME,
+=======
+>>>>>>> gh-pages
     PRIMARY KEY (id)
 );
 INSERT INTO date_and_time_datatypes(date_data, datetime_data, timestamp_data)

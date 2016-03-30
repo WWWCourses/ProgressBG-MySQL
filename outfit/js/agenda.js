@@ -1,7 +1,7 @@
 function init(){
     attachEvents();
     calcTotalHours();
-    showAllNodes( document.getElementsByClassName('iep_syllabus_sub_themes') );
+    hideAllNodes( document.getElementsByClassName('iep_syllabus_sub_themes') );
 }
 function attachEvents(){
     // get elements to attach events to

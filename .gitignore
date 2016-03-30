@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 /logs/**
 .gitignore
+=======
+/logs
+/logs/**
+>>>>>>> gh-pages
