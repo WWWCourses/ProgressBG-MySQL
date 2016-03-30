@@ -34,7 +34,7 @@
 </head>
 <body>
     <div class="reveal default center" data-transition-speed="default" data-background-transition="default">
-        <a class="home_link" href="../../../agenda/beginners.html#Tables_insert_delete_update_data.html" target="_top"><i class="fa fa-home"></i></a>
+        <a class="home_link" href="../../../agenda/beginners.html#Insert_delete_update_data.html" target="_top"><i class="fa fa-home"></i></a>
         <div class="footer theme_switch">
             <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/white.css'); return false;">White</a>
             <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/league.css'); return false;">League</a>
@@ -73,14 +73,102 @@
 <section><h2>INSERT INTO table</h2>
     <section><h3>The syntax</h3>
         <pre><code>
-INSERT INTO table [(column, ...)]
+INSERT INTO table_name [(column, ...)]
 VALUES (value, ...), (...), ...;
         </code></pre>
-        <p>Example</p>
-        <pre><code>
-
-        </code></pre>
+        <dl class="fa">
+            <dt>Column list is optional!</dt>
+                <dd>If not present, you should list in VALUES values for all columns, following the order in table definition.</dd>
+            <dt>You can insert more than 1 row at a time, by using a list of values arrays.</dt>
+        </dl>
     </section>
+    <section><h3>Examples</h3>
+        <p>Without specifying columns</p>
+        <pre><code>
+INSERT INTO artist
+VALUES (0,'Robert', 'Smith');
+        </code>
+Query OK, 1 row affected
+        </pre>
+        <p>But:</p>
+        <pre><code>
+INSERT INTO artist
+VALUES ('Madonna');
+        </code>
+(1136, u"Column count doesn't match value count at row 1")
+        </pre>
+        <p>With explicit column specification</p>
+        <pre><code>
+INSERT INTO artist(lname)
+VALUES ('Piazzolla');
+        </code>
+Query OK, 1 row affected
+        </pre>
+    </section>
+    <section><h3>Examples</h3>
+         <p>Insert more than 1 row at a time</p>
+        <pre><code>
+INSERT INTO artist( lname, fname )
+VALUES ( 'Schnittke', 'Alfred' ),
+       ( 'Pärt', 'Arvo' ),
+       ( 'Shostakovich', 'Dmitri' );
+        </code>
+Query OK, 3 rows affected
+        </pre>
+    </section>
+</section>
+<section><h2>Delete</h2>
+    <section><h3>The Syntax</h3>
+        <pre><code>
+DELETE FROM table_name
+[WHERE where_condition]
+[ORDER BY ...]
+[LIMIT row_count]
+        </code></pre>
+        <dl class="fa">
+            <dt>The conditions in the optional WHERE clause identify which rows to delete. With no WHERE clause, <span class="note">all rows are deleted</span>.</dt>
+            <dt>The LIMIT clause places a limit on the number of rows that can be deleted.</dt>
+            <dt>If the ORDER BY clause is specified, the rows are deleted in the order that is specified.</dt>
+        </dl>
+    </section>
+    <section><h3>Examples</h3>
+        <pre><code>
+delete from artist WHERE
+    artist_id BETWEEN 9 AND 13;
+        </code>
+Query OK, 5 rows affected
+        </pre>
+    </section>
+</section>
+
+<section><h2>Update</h2>
+    <section><h3>The Syntax</h3>
+        <pre><code>
+UPDATE table_name
+SET column1=value, column2=value2,...
+[WHERE where_clause]
+[ORDER BY ...]
+[LIMIT row_count]
+        </code></pre>
+        <dl class="fa">
+        <dt>The WHERE clause, if given, specifies the conditions that identify which rows to update</dt>
+            <dd>With no WHERE clause, all rows are updated!</dd>
+        <dt>If the ORDER BY clause is specified, the rows are updated in the order that is specified.</dt>
+        <dt>The LIMIT clause places a limit on the number of rows that can be updated.</dt>
+        </dl>
+    </section>
+    <section><h3>Examples</h3>
+    <pre><code>
+UPDATE artist
+SET fname='Test', lname='Test'
+WHERE artist_id >= 14;
+    </code>
+Query OK, 2 rows affected
+    </pre>
+    </section>
+</section>
+<section><h3>Comparison Functions and Operators</h3>
+    <a href="http://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html">Comparison Functions and Operators</a>
 </section>
 
 <section data-background="/ProgressBG-MySQL/outfit/images/for_slides/the_end_on_sand.jpg">
