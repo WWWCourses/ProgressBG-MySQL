@@ -167,37 +167,56 @@ Query OK, 2 rows affected
     </pre>
     </section>
 </section>
-<section><h3>Comparison Functions and Operators</h3>
-    <a href="http://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html">Comparison Functions and Operators</a>
+<section><h2>Reference</h2>
+    <p>Check <a href="http://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html">Comparison Functions and Operators</a> to use them in <span class="impotant">WHERE Clause</span></p>
 </section>
-<section><h3>Exercises</h3>
-<ol>
-    <li>CONNECT TO MySQL as ROOT</li>
-    <li>CRETE DB: books_db</li>
-    <li>CREATE books_db_admin;</li>
-    <li>GRANT ALL PRIVILEGES ON ...</li>
-    <li>CONNECT to books_db as books_db_admin</li>
-    <li>CREATE TABLE :</li>
-</ol>
-</section>
-<section><h3>Exercises</h3>
-<p>table: book</p>
-<pre>
-----------------
+<section>
+    <section>
+        <h2>Exercises</h2>
+    </section>
+    <section>
+        <ol class="fs-small">
+            <li>CONNECT TO MySQL as ROOT</li>
+            <li>CRETE DB: <span class="note">books_db</span></li>
+            <li>CREATE <span class="note">books_db_admin</span></li>
+            <li>GRANT admin privileges to <span class="note">books_db_admin</span> on <span class="note">books_db</span></li>
+            <li>CONNECT to <span class="note">books_db</span> as <span class="note">books_db_admin</span></li>
+        </ol>
+    </section>
+    <section>
+        <ol start="6">
+            <li>Create next tables, using the appropriate data types for columns:
+            <dd>table <span class="note">author</span>:</dd>
+            <pre class="fs-smaller">
+Columns:
+--------------------------------
+id (primary key, auto_increment)
+fname,
+lname,
+birth_year,
+death_year;
+            </pre>
+            <dd>table <span class="note">book</span>:</dd>
+            <pre class="fs-smaller">
+Columns:
+--------------------------------
 id (primary key, auto_increment)
 author_id,
 book_name,
 pub_year;
-</pre>
-
-<p>table: author</p>
-<pre>
-----------------
-id (primary key, auto_increment)
-fname,
-lname,
-birth_year;
-</pre>
+            </pre>
+            </li>
+        </ol>
+        <p><span class="note">If you need to store years less than 1900, you have to use some integer type for that - SMALLINT(4) should be enough for most cases</span>.</p>
+    </section>
+    <section>
+        <dl class="fa">
+            <dt>You can examine the sample DataBase <span class="note">books_db</span>:</dt>
+            <dd>Download the <a href="slides_examples/books_db_schema.sql">books_db_schema.sql</a></dd>
+            <dd>Download the <a href="slides_examples/books_db_sample_data.sql">books_db_sample_data.sql</a></dd>
+            <dd>Execute the SQL statements by using one of the approaches described in <a href="/ProgressBG-MySQL/pages/themes/beginners/MySQL_Intro/MySQL_Intro.html#load_external_sql">MySQL_Intro.html (load_external_sql)</a></dd>
+        </dl>
+    </section>
 </section>
 
 <section data-background="/ProgressBG-MySQL/outfit/images/for_slides/the_end_on_sand.jpg">

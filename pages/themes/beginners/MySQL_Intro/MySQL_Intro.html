@@ -74,23 +74,6 @@
         </div>
     </div>
 </section>
-<section><h2>Executing SQL Statements from a text file</h2>
-    <section><h3>While connecting with MySQL client</h3>
-        <pre><code>
-mysql -u user_name -p [db_name] < text_file
-        </code></pre>
-        <ul>
-            <li><span class="note">[db_name]</span> is optional (if not set, you can 'use db_name' later)</li>
-            <li><span class="note">text_file</span> is an ASCII file, which contains SQL statements</li>
-        </ul>
-
-    </section>
-    <section><h3>In MySQL client</h3>
-        <pre><code>
-mysql> source file_name
-        </code></pre>
-    </section>
-</section>
 <section id="Manage_databases"><h2>Manage databases</h2>
     <section><h3>List All Databases</h3>
         <pre><code>
@@ -307,6 +290,28 @@ ALTER TABLE artist DROP birth_date;
 +---------------+-------------+------+-----+---------+
             </code></pre>
         </dl>
+    </section>
+</section>
+<section id="load_external_sql"><h2>Executing SQL Statements stored in external file</h2>
+    <section><h3>While connecting with MySQL client</h3>
+        <pre><code>
+mysql -u user_name -p [db_name] < full_file_name
+        </code></pre>
+        <ul>
+            <li><span class="note">[db_name]</span> is optional (if not set, you'll have to state 'use db_name' later)</li>
+            <li><span class="note">text_file</span> is an ASCII file, which contains SQL statements</li>
+        </ul>
+    </section>
+    <section><h3>In MySQL client</h3>
+        <pre><code>
+mysql> source full_file_name
+        </code></pre>
+    </section>
+    <section><h3>Using MySQL Workbench</h3>
+        <ul>
+            <li><p>Go to <code class="note">'File'</code>=><code class="note">'Run SQL script...'</code> and browse to select the file, which contains the SQL statements you want to execute.</p></li>
+            <li><p>You can do the same by <code class="note">'File'</code>=><code class="note">'Open SQL script...'</code> and execute the statements in Workbench editor.</p></li>
+        </ul>
     </section>
 </section>
 
