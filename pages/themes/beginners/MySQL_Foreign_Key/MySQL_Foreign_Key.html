@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>MySQL_Foreign_Key</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <!-- css & themes include -->
+    <link rel="stylesheet" href="/ProgressBG-MySQL/lib/reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="/ProgressBG-MySQL/lib/reveal.js/css/theme/league.css" id="theme">
+    <!-- Code syntax highlighting -->
+    <!-- <link rel="stylesheet" href="/ProgressBG-MySQL/lib/reveal.js/lib/css/zenburn.css"> -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/obsidian.min.css">
+    <!--DARK:  tomorrow-night/monokai-sublime/obsidian/tomorrow-night-eighties/ -->
+    <!-- LIGHT:tomorrow/ -->
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? '/ProgressBG-MySQL/lib/reveal.js/css/print/pdf.css' : '/ProgressBG-MySQL/lib/reveal.js/css/print/paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+    <!-- CUSTOM -->
+    <!-- CUSTOM -->
+    <link rel="stylesheet" href="/ProgressBG-MySQL/outfit/css/reveal.js.css">
+    <link rel="stylesheet" type="text/css" href="/ProgressBG-MySQL/outfit/css/custom_hljs.css">
+    <link rel="stylesheet" type="text/css" href="/ProgressBG-MySQL/outfit/css/common/themes/MatDes/text_schemes.css">
+    <base target="_blank">
+</head>
+<body>
+    <div class="reveal default center" data-transition-speed="default" data-background-transition="default">
+        <a class="home_link" href="../../../agenda/beginners.html#MySQL_Foreign_Key" target="_top"><i class="fa fa-home"></i></a>
+        <div class="footer theme_switch">
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/white.css'); return false;">White</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/league.css'); return false;">League</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/sky.css'); return false;">Sky</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/beige.css'); return false;">Beige</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/simple.css'); return false;">Simple</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/serif.css'); return false;">Serif</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/night.css'); return false;">Night</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/moon.css'); return false;">Moon</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/solarized.css'); return false;">Solarized</a>
+        </div>
+        <div class="slides">
+<!--
+########################################################
+##################### SLIDES START #####################
+########################################################
+-->
+<section><h1>SQL Constraints. Foreign key constraints.</h1></section>
+<section data-transition="zoom">
+    <div class="copyright">
+        <div class="note">
+            <p>Created for</p>
+        </div>
+        <div class="company">
+            <a href="http://progressbg.net/kurs-po-web-design/">
+            <img style="height:80%" src="/ProgressBG-MySQL/outfit/images/logos/ProgressBG_logo_529_127.png">
+            </a>
+        </div>
+        <div class="author">
+            <span>Iva E. Popova, 2016,</span>
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+        </div>
+    </div>
+</section>
+
+<section id="constraints"><h2>SQL Constraints</h2>
+    <section><h3>The Syntax</h3>
+        <p>CONSTRAINT Syntax in CREATE TABLE</p>
+        <pre><code class="sql">
+CREATE TABLE table_name(
+    column_name data_type(size) constraint_name,
+    ...
+);
+        </code></pre>
+    </section>
+    <section><h3>NOT NULL</h3>
+        <p>Indicates that a column cannot store NULL value</p>
+        <pre><code>
+CREATE TABLE book (
+    id SMALLINT(3) UNSIGNED NOT NULL,
+    ...
+);
+        </code></pre>
+    </section>
+    <section><h3>UNIQUE</h3>
+        <p>Ensures that each row for a column must have a unique value</p>
+        <pre><code>
+CREATE TABLE book (
+    book_name VARCHAR(250) NOT NULL UNIQUE,
+    ...
+);
+        </code></pre>
+    </section>
+    <section><h3>PRIMARY KEY</h3>
+        <p>A combination of a NOT NULL and UNIQUE. Ensures that a column (or combination of two or more columns) have a unique identity which helps to find a particular record in a table more easily and quickly</p>
+        <pre><code>
+CREATE TABLE book (
+    id SMALLINT(3) UNSIGNED NOT NULL PRIMARY KEY,
+    ...
+);
+        </code></pre>
+    </section>
+    <section><h3>FOREIGN KEY</h3>
+        <p>Ensure the referential integrity of the data in one table to match values in another table</p>
+        <pre><code>
+CREATE TABLE book (
+    book_name VARCHAR(250) NOT NULL UNIQUE,
+    ...
+);
+        </code></pre>
+    </section>
+    <section><h3>CHECK</h3>
+        <p>Ensures that the value in a column meets a specific condition</p>
+        <pre><code>
+CREATE TABLE book (
+    book_name VARCHAR(250) NOT NULL UNIQUE,
+    ...
+);
+        </code></pre>
+    </section>
+    <section><h3>DEFAULT</h3>
+        <p>Specifies a default value for a column</p>
+        <pre><code>
+CREATE TABLE book (
+    book_name VARCHAR(250) NOT NULL UNIQUE,
+    ...
+);
+    </code></pre>
+    </section>
+</section>
+<section id="referential_integrity"><h2>Referential Integrity</h2>
+    <p>Reference:</p>
+    <a href="https://en.wikipedia.org/wiki/Referential_integrity">Referential integrity in wikipedia</a>
+</section>
+<section id="foreign_key"><h2>FOREIGN KEY constraints</h2>
+    <section><h3>Definition</h3>
+        <dl class="fa">
+            <dt>A <span class="keyword">FOREIGN KEY</span> in one table points to a PRIMARY KEY in another table.</dt>
+        </dl>
+    </section>
+    <section><h3>Examples</h3>
+        <pre><code>
+CREATE TABLE author (
+    id SMALLINT(3) UNSIGNED NOT NULL AUTO_INCREMENT,
+    fname VARCHAR(250) DEFAULT NULL,
+    lname VARCHAR(250) NOT NULL,
+    birth_year SMALLINT(4) DEFAULT NULL,
+    death_year SMALLINT(4) DEFAULT NULL,
+    PRIMARY KEY(id)
+);
+        </code></pre>
+        <pre><code>
+CREATE TABLE book (
+    id SMALLINT(3) UNSIGNED NOT NULL AUTO_INCREMENT,
+    author_id SMALLINT(3) UNSIGNED NOT NULL,
+    book_name VARCHAR(250) NOT NULL UNIQUE,
+    pub_year SMALLINT(4) UNSIGNED DEFAULT NULL,
+    PRIMARY KEY(id)
+);
+        </code></pre>
+        <p><span class="note">book.author_id</span> is a Foreign Key in <span class="note">book</span> table</p>
+    </section>
+</section>
+<section id="foreign_key_constraints">
+    <a href="http://www.w3schools.com/sql/sql_foreignkey.asp">w3schools: SQL FOREIGN KEY Constraint</a>
+</section>
+<section data-background="/ProgressBG-MySQL/outfit/images/for_slides/the_end_on_sand.jpg">
+    <!-- <img class="the_end" src="/ProgressBG-MySQL/outfit/images/for_slides/the_end_on_sand.jpg"> -->
+</section>
+<!--
+########################################################
+##################### SLIDES END   #####################
+########################################################
+-->
+        </div>
+    </div>
+    <!-- external scripts -->
+    <script src="/ProgressBG-MySQL/lib/reveal.js/lib/js/head.min.js"></script>
+    <script src="/ProgressBG-MySQL/lib/reveal.js/js/reveal.js"></script>
+     <!-- init reveal -->
+    <script>
+        // Full list of configuration options available at:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            slideNumber: 'c/t',
+            keyboard: true,
+            history: true,
+            center: true,
+            width: 1024,
+            height: 850,
+            // Bounds for smallest/largest possible scale to apply to content
+            // minScale: .5,
+            maxScale: 1,
+            // slide transition
+            transition: 'concave', // none/fade/slide/convex/concave/zoom
+            // Factor of the display size that should remain empty around the content
+            margin: 0.1,
+            // shift+maous click to zoom in/out element
+            zoomKey: 'ctrl',
+            // theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+            // transition: Reveal.getQueryHash().transition || 'default'
+            // Optional reveal.js plugins
+            dependencies: [
+                { src: '/ProgressBG-MySQL/lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                { src: '/ProgressBG-MySQL/lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: '/ProgressBG-MySQL/lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: '/ProgressBG-MySQL/lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                { src: '/ProgressBG-MySQL/lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+                { src: '/ProgressBG-MySQL/lib/reveal.js/plugin/notes/notes.js', async: true }
+            ]
+        });
+    </script>
+</body>
+</html>

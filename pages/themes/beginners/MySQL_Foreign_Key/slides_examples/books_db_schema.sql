@@ -8,13 +8,12 @@ CREATE TABLE author (
     lname VARCHAR(250) NOT NULL,
     birth_year SMALLINT(4) DEFAULT NULL,
     death_year SMALLINT(4) DEFAULT NULL,
-    INDEX(lname(10))
+    PRIMARY KEY(id)
 );
 CREATE TABLE book (
+    id SMALLINT(3) UNSIGNED NOT NULL AUTO_INCREMENT,
     author_id SMALLINT(3) UNSIGNED NOT NULL,
-    book_name VARCHAR(250) NOT NULL,
+    book_name VARCHAR(250) NOT NULL UNIQUE,
     pub_year SMALLINT(4) UNSIGNED DEFAULT NULL,
-    INDEX(author_id(10)),
-    INDEX(book_name(10)),
-
+    PRIMARY KEY(id)
 );
