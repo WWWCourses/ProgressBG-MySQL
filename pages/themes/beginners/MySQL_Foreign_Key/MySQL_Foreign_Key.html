@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>MySQL_Foreign_Key</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <!-- css & themes include -->
+    <link rel="stylesheet" href="/ProgressBG-MySQL/lib/reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="/ProgressBG-MySQL/lib/reveal.js/css/theme/league.css" id="theme">
+    <!-- Code syntax highlighting -->
+    <!-- <link rel="stylesheet" href="/ProgressBG-MySQL/lib/reveal.js/lib/css/zenburn.css"> -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/obsidian.min.css">
+    <!--DARK:  tomorrow-night/monokai-sublime/obsidian/tomorrow-night-eighties/ -->
+    <!-- LIGHT:tomorrow/ -->
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? '/ProgressBG-MySQL/lib/reveal.js/css/print/pdf.css' : '/ProgressBG-MySQL/lib/reveal.js/css/print/paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+    <!-- CUSTOM -->
+    <!-- CUSTOM -->
+    <link rel="stylesheet" href="/ProgressBG-MySQL/outfit/css/reveal.js.css">
+    <link rel="stylesheet" type="text/css" href="/ProgressBG-MySQL/outfit/css/custom_hljs.css">
+    <link rel="stylesheet" type="text/css" href="/ProgressBG-MySQL/outfit/css/common/themes/MatDes/text_schemes.css">
+    <base target="_blank">
+</head>
+<body>
+    <div class="reveal default center" data-transition-speed="default" data-background-transition="default">
+        <a class="home_link" href="../../../agenda/beginners.html#MySQL_Foreign_Key" target="_top"><i class="fa fa-home"></i></a>
+        <div class="footer theme_switch">
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/white.css'); return false;">White</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/league.css'); return false;">League</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/sky.css'); return false;">Sky</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/beige.css'); return false;">Beige</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/simple.css'); return false;">Simple</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/serif.css'); return false;">Serif</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/night.css'); return false;">Night</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/moon.css'); return false;">Moon</a>
+            <a href="#" onclick="document.getElementById('theme').setAttribute('href','/ProgressBG-MySQL/lib/reveal.js/css/theme/solarized.css'); return false;">Solarized</a>
+        </div>
+        <div class="slides">
+<!--
+########################################################
+##################### SLIDES START #####################
+########################################################
+-->
+<section><h1>MySQL_Foreign_Key</h1></section>
+<section data-transition="zoom">
+    <div class="copyright">
+        <div class="note">
+            <p>Created for</p>
+        </div>
+        <div class="company">
+            <a href="http://progressbg.net/kurs-po-web-design/">
+            <img style="height:80%" src="/ProgressBG-MySQL/outfit/images/logos/ProgressBG_logo_529_127.png">
+            </a>
+        </div>
+        <div class="author">
+            <span>Iva E. Popova, 2016,</span>
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+        </div>
+    </div>
+</section>
+
+<section id="intro"><h2>Introduction</h2>
+    <section><h3>What and Why?</h3>
+        <dl class="fa">
+           <dt>A database index is added to a table <span class="note">to speed up the search</span> operation.</dt>
+           <dt>An index is used by the Database Search Engine to locate records very fast.</dt>
+           <dt>Indexes can be created for one or more columns.</dt>
+           <dt>Indexes are implemented as a type of tables, which keep index field and a pointer to each record into the actual table.</dt>
+           <dt>While adding index to a table will speed the SELECT queries, it will <span class="note">slow down</span> the INSERT and UPDATE statement.</dt>
+        </dl>
+    </section>
+    <section><h3>Types of indexes</h3>
+        <dl class="fa">
+            <dt>A regular INDEX</dt>
+            <dt>PRIMARY KEY</dt>
+            <dt>FULLTEXT</dt>
+        </dl>
+    </section>
+</section>
+<section id="regular_indexes"><h2>Regular index</h2>
+    <section><h3>Considerations</h3>
+        <dl class="fa">
+            <dt>Consider data in which columns will be searched most often.</dt>
+        </dl>
+    </section>
+    <section id="add_index"><h3>Add regular Index to a table</h3>
+        <p>The syntax:</p>
+        <pre><code>
+ALTER TABLE table_name ADD INDEX(column_name(index_length));
+        </code></pre>
+        <dl class="fa">
+            <dt>The <span class="code">index_length</span> could be specified to minimize the size of the index, and to optimize database access speed.</dt>
+        <dt>If <span class="code">index_length</span> is specified, it should be long enough, because if MySQL finds two indexes with the same contents, it will have to waste time going to the table itself and checking the column that was indexed to find out which rows really matched.</dt>
+        </dl>
+    </section>
+    <section id="add_index_example"><h3>Example</h3>
+        <p>Let's have the <span class="code">artist</span> table, defined as:</p>
+        <pre>
+mysql music_db_admin@localhost:music_db> desc artist;
++---------+-------------+--------+-------+-----------+---------+
+| Field   | Type        | Null   | Key   |   Default | Extra   |
+|---------+-------------+--------+-------+-----------+---------|
+| fname   | varchar(20) | YES    |       |    &lt;null&gt; |         |
+| lname   | varchar(20) | NO     |       |    &lt;null&gt; |         |
++---------+-------------+--------+-------+-----------+---------+
+        </pre>
+        <p>An index could be added as:</p>
+        <pre><code>
+ALTER TABLE artist ADD INDEX(lname(10));
+        </code></pre>
+        <p>Resulting in:</p>
+        <pre>
+mysql music_db_admin@localhost:music_db> desc artist;
++---------+-------------+--------+-------+-----------+---------+
+| Field   | Type        | Null   | Key   |   Default | Extra   |
+|---------+-------------+--------+-------+-----------+---------|
+| fname   | varchar(20) | YES    |       |    &lt;null&gt; |         |
+| lname   | varchar(20) | NO     | <span class="note">MUL</span>   |    &lt;null&gt; |         |
++---------+-------------+--------+-------+-----------+---------+
+        </pre>
+        <p>The <span class="note">MUL</span> key means that multiple occurrences of a value may occur within that column.</p>
+    </section>
+    <section id="create_index"><h3>Using CREATE INDEX</h3>
+        <p>The syntax:</p>
+        <pre><code>
+CREATE INDEX column_name ON table_name (column_name(index_length));
+        </code></pre>
+        <dl class="fa">
+            <dt>It is an alternative to adding an index with ALTER TABLE.</dt>
+            <dt><span class="note">NB!</span> They are equivalent, except that CREATE INDEX cannot be used to create a PRIMARY KEY</dt>
+        </dl>
+    </section>
+    <section id="on_create_table"><h3>Adding indexes when creating tables</h3>
+        <p>You should be aware that adding an index to a large table can take a very long time.</p>
+        <p>That's why is better to add the index when creating the table!</p>
+        <pre><code>
+CREATE TABLE artist (
+    fname VARCHAR(20) DEFAULT NULL,
+    lname VARCHAR(20) NOT NULL,
+    INDEX(lname(10))
+);
+        </code></pre>
+    </section>
+</section>
+<section id="primary_key"><h2>Primary key</h2>
+    <section><h3>Why?</h3>
+        <p>Regular indexes do not impose the values to be unique!</p>
+        <p>The importance of having a key with a unique value for each row will come up when we start to combine data from different tables.</p>
+    </section>
+    <section id="primary_key_create"><h3>Create</h3>
+        <p>By adding the PRIMARY KEY(column_name) at the end of CREATE TABLE.</p>
+        <pre><code>
+CREATE TABLE artist (
+    id MEDIUMINT(4) NOT NULL AUTO_INCREMENT,
+    fname VARCHAR(20) DEFAULT NULL,
+    lname VARCHAR(20) NOT NULL,
+    PRIMARY KEY(id)
+);
+        </code></pre>
+        <p>Resulting in:</p>
+        <pre>
++---------+--------------+--------+-------+-----------+----------------+
+| Field   | Type         | Null   | Key   |   Default | Extra          |
+|---------+--------------+--------+-------+-----------+----------------|
+| id      | mediumint(4) | NO     | PRI   |    &lt;null&gt; | auto_increment |
+| fname   | varchar(20)  | YES    |       |    &lt;null&gt; |                |
+| lname   | varchar(20)  | NO     |       |    &lt;null&gt; |                |
++---------+--------------+--------+-------+-----------+----------------+
+        </pre>
+        <p><span class="note">NB!</span> As PRIMARY KEY requires unique values, the <span class="code">NOT NULL</span> and/or <span class="code">AUTO_INCREMENT</span> attribute should be present.</p>
+    </section>
+    <section id="primary_key_create"><h3>Create - alternative notation</h3>
+
+    </section>
+</section>
+<section id="auto_increment"><h2>The AUTO_INCREMENT attribute</h2>
+    <section id="auto_increment"><h3>The AUTO_INCREMENT attribute</h3>
+        <dl class="fa">
+            <dt>The AUTO_INCREMENT attribute can be used to generate a unique identity for new rows.</dt>
+            <dt>A column defined with that attribute will set the value of its contents to that of the column entry in the previously inserted row, plus 1.</dt>
+        </dl>
+    </section>
+    <section id="auto_increment"><h3>AUTO_INCREMENT - example</h3>
+        <pre><code>
+CREATE TABLE artist (
+  artist_id SMALLINT(5) NOT NULL AUTO_INCREMENT KEY,
+  fname VARCHAR(20) DEFAULT NULL,
+  lname VARCHAR(20) NOT NULL
+);
+        </code></pre>
+        <p><span class="note">The KEY attribute should also be defined!</span></p>
+        <p>If it is not present, MySQL raises an error: <span class="code">'Incorrect table definition; there can be only one auto column and it must be defined as a key'</span>.</p>
+    </section>
+</section>
+
+<section data-background="/ProgressBG-MySQL/outfit/images/for_slides/the_end_on_sand.jpg">
+    <!-- <img class="the_end" src="/ProgressBG-MySQL/outfit/images/for_slides/the_end_on_sand.jpg"> -->
+</section>
+<!--
+########################################################
+##################### SLIDES END   #####################
+########################################################
+-->
+        </div>
+    </div>
+    <!-- external scripts -->
+    <script src="/ProgressBG-MySQL/lib/reveal.js/lib/js/head.min.js"></script>
+    <script src="/ProgressBG-MySQL/lib/reveal.js/js/reveal.js"></script>
+     <!-- init reveal -->
+    <script>
+        // Full list of configuration options available at:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            slideNumber: 'c/t',
+            keyboard: true,
+            history: true,
+            center: true,
+            width: 1024,
+            height: 850,
+            // Bounds for smallest/largest possible scale to apply to content
+            // minScale: .5,
+            maxScale: 1,
+            // slide transition
+            transition: 'concave', // none/fade/slide/convex/concave/zoom
+            // Factor of the display size that should remain empty around the content
+            margin: 0.1,
+            // shift+maous click to zoom in/out element
+            zoomKey: 'ctrl',
+            // theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+            // transition: Reveal.getQueryHash().transition || 'default'
+            // Optional reveal.js plugins
+            dependencies: [
+                { src: '/ProgressBG-MySQL/lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                { src: '/ProgressBG-MySQL/lib/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: '/ProgressBG-MySQL/lib/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: '/ProgressBG-MySQL/lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                { src: '/ProgressBG-MySQL/lib/reveal.js/plugin/zoom-js/zoom.js', async: true },
+                { src: '/ProgressBG-MySQL/lib/reveal.js/plugin/notes/notes.js', async: true }
+            ]
+        });
+    </script>
+</body>
+</html>
