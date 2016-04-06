@@ -52,7 +52,7 @@
 ##################### SLIDES START #####################
 ########################################################
 -->
-<section><h1>MySQL_Foreign_Key</h1></section>
+<section><h1>SQL Constraints. Foreign key constraints.</h1></section>
 <section data-transition="zoom">
     <div class="copyright">
         <div class="note">
@@ -70,12 +70,107 @@
     </div>
 </section>
 
-<section id="intro"><h2>Introduction</h2>
-    <section><h3>What and Why?</h3>
+<section id="constraints"><h2>SQL Constraints</h2>
+    <section><h3>The Syntax</h3>
+        <p>CONSTRAINT Syntax in CREATE TABLE</p>
+        <pre><code class="sql">
+CREATE TABLE table_name(
+    column_name data_type(size) constraint_name,
+    ...
+);
+        </code></pre>
     </section>
-
+    <section><h3>NOT NULL</h3>
+        <p>Indicates that a column cannot store NULL value</p>
+        <pre><code>
+CREATE TABLE book (
+    id SMALLINT(3) UNSIGNED NOT NULL,
+    ...
+);
+        </code></pre>
+    </section>
+    <section><h3>UNIQUE</h3>
+        <p>Ensures that each row for a column must have a unique value</p>
+        <pre><code>
+CREATE TABLE book (
+    book_name VARCHAR(250) NOT NULL UNIQUE,
+    ...
+);
+        </code></pre>
+    </section>
+    <section><h3>PRIMARY KEY</h3>
+        <p>A combination of a NOT NULL and UNIQUE. Ensures that a column (or combination of two or more columns) have a unique identity which helps to find a particular record in a table more easily and quickly</p>
+        <pre><code>
+CREATE TABLE book (
+    id SMALLINT(3) UNSIGNED NOT NULL PRIMARY KEY,
+    ...
+);
+        </code></pre>
+    </section>
+    <section><h3>FOREIGN KEY</h3>
+        <p>Ensure the referential integrity of the data in one table to match values in another table</p>
+        <pre><code>
+CREATE TABLE book (
+    book_name VARCHAR(250) NOT NULL UNIQUE,
+    ...
+);
+        </code></pre>
+    </section>
+    <section><h3>CHECK</h3>
+        <p>Ensures that the value in a column meets a specific condition</p>
+        <pre><code>
+CREATE TABLE book (
+    book_name VARCHAR(250) NOT NULL UNIQUE,
+    ...
+);
+        </code></pre>
+    </section>
+    <section><h3>DEFAULT</h3>
+        <p>Specifies a default value for a column</p>
+        <pre><code>
+CREATE TABLE book (
+    book_name VARCHAR(250) NOT NULL UNIQUE,
+    ...
+);
+    </code></pre>
+    </section>
 </section>
-
+<section id="referential_integrity"><h2>Referential Integrity</h2>
+    <p>Reference:</p>
+    <a href="https://en.wikipedia.org/wiki/Referential_integrity">Referential integrity in wikipedia</a>
+</section>
+<section id="foreign_key"><h2>FOREIGN KEY constraints</h2>
+    <section><h3>Definition</h3>
+        <dl class="fa">
+            <dt>A <span class="keyword">FOREIGN KEY</span> in one table points to a PRIMARY KEY in another table.</dt>
+        </dl>
+    </section>
+    <section><h3>Examples</h3>
+        <pre><code>
+CREATE TABLE author (
+    id SMALLINT(3) UNSIGNED NOT NULL AUTO_INCREMENT,
+    fname VARCHAR(250) DEFAULT NULL,
+    lname VARCHAR(250) NOT NULL,
+    birth_year SMALLINT(4) DEFAULT NULL,
+    death_year SMALLINT(4) DEFAULT NULL,
+    PRIMARY KEY(id)
+);
+        </code></pre>
+        <pre><code>
+CREATE TABLE book (
+    id SMALLINT(3) UNSIGNED NOT NULL AUTO_INCREMENT,
+    author_id SMALLINT(3) UNSIGNED NOT NULL,
+    book_name VARCHAR(250) NOT NULL UNIQUE,
+    pub_year SMALLINT(4) UNSIGNED DEFAULT NULL,
+    PRIMARY KEY(id)
+);
+        </code></pre>
+        <p><span class="note">book.author_id</span> is a Foreign Key in <span class="note">book</span> table</p>
+    </section>
+</section>
+<section id="foreign_key_constraints">
+    <a href="http://www.w3schools.com/sql/sql_foreignkey.asp">w3schools: SQL FOREIGN KEY Constraint</a>
+</section>
 <section data-background="/ProgressBG-MySQL/outfit/images/for_slides/the_end_on_sand.jpg">
     <!-- <img class="the_end" src="/ProgressBG-MySQL/outfit/images/for_slides/the_end_on_sand.jpg"> -->
 </section>
