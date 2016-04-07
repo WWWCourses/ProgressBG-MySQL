@@ -1,0 +1,25 @@
+Create DB: household_manager_db
+
+Create next tables but fill the commented parts (starting with '#') where specified:
+    table: family_member
+        id SMALLINT(1) UNSIGNED NOT NULL AUTO_INCREMENT,
+        name VARCHAR(250),
+
+    table: product_category
+        id SMALLINT(2) UNSIGNED NOT NULL AUTO_INCREMENT,
+        category_name VARCHAR(250),
+
+    table: product
+        id MEDIUMINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
+        product_name VARCHAR(250),
+        price DECIMAL(7,2),
+        category_id # set definition here
+        # define FOREIGN KEY constraints for category_id on product_category.id
+
+    table: purchase
+        id INT(7) UNSIGNED NOT NULL AUTO_INCREMENT,
+        family_member_id SMALLINT(1) UNSIGNED NOT NULL AUTO_INCREMENT,
+        product_id id MEDIUMINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
+
+
+
