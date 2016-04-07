@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <!-- TODO: Update all constraints synntax -->
     <meta charset="utf-8">
     <title>MySQL_Foreign_Key</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -71,13 +72,22 @@
 </section>
 
 <section id="constraints"><h2>SQL Constraints</h2>
-    <section><h3>The Syntax</h3>
-        <p>CONSTRAINT Syntax in CREATE TABLE</p>
+    <section><h3>The syntax in CREATE TABLE</h3>
+        <p>Constraint on single column:</p>
         <pre><code class="sql">
 CREATE TABLE table_name(
     column_name data_type(size) constraint_name,
     ...
 );
+        </code></pre>
+        <p>you can define constraints on more than one column, by using constraint on table, like:</p>
+        <pre><code>
+CREATE TABLE author(
+    id int(4) key auto_increment,
+    fname varchar(200),
+    lname varchar(200),
+    UNIQUE(fname,lname)
+)
         </code></pre>
     </section>
     <section><h3>NOT NULL</h3>
@@ -89,14 +99,28 @@ CREATE TABLE book (
 );
         </code></pre>
     </section>
+    <section><h3>DEFAULT</h3>
+        <p>Specifies a default value for a column</p>
+        <pre><code>
+CREATE TABLE book (
+    pub_year MEDIUMINT(4) DEFAULT NULL,
+    ...
+);
+    </code></pre>
+    </section>
     <section><h3>UNIQUE</h3>
-        <p>Ensures that each row for a column must have a unique value</p>
+        <p>Ensures that each row for a column must have a <span class="note">unique</span> value</p>
         <pre><code>
 CREATE TABLE book (
     book_name VARCHAR(250) NOT NULL UNIQUE,
     ...
 );
         </code></pre>
+        <p>Some vendors, MySQL as well, allows a UNIQUE column to be set with <span class="keyword">DEFAULT NULL</span> values, as by definition a NULL value is not equal to a NULL value. Anyway, it is not recommended to have UNIQUE and DEFAULT NULL column.</p>
+    </section>
+    <section><h3>CHECK</h3>
+       <p><i class="ionicons ion-university img fs-normal"></i> self-learning section:</p>
+       <a href="http://www.w3schools.com/sql/sql_check.asp">w3schools: SQL CHECK Constraint</a>
     </section>
     <section><h3>PRIMARY KEY</h3>
         <p>A combination of a NOT NULL and UNIQUE. Ensures that a column (or combination of two or more columns) have a unique identity which helps to find a particular record in a table more easily and quickly</p>
@@ -107,67 +131,104 @@ CREATE TABLE book (
 );
         </code></pre>
     </section>
-    <section><h3>FOREIGN KEY</h3>
-        <p>Ensure the referential integrity of the data in one table to match values in another table</p>
-        <pre><code>
-CREATE TABLE book (
-    book_name VARCHAR(250) NOT NULL UNIQUE,
-    ...
-);
-        </code></pre>
-    </section>
-    <section><h3>CHECK</h3>
-        <p>Ensures that the value in a column meets a specific condition</p>
-        <pre><code>
-CREATE TABLE book (
-    book_name VARCHAR(250) NOT NULL UNIQUE,
-    ...
-);
-        </code></pre>
-    </section>
-    <section><h3>DEFAULT</h3>
-        <p>Specifies a default value for a column</p>
-        <pre><code>
-CREATE TABLE book (
-    book_name VARCHAR(250) NOT NULL UNIQUE,
-    ...
-);
-    </code></pre>
-    </section>
-</section>
-<section id="referential_integrity"><h2>Referential Integrity</h2>
-    <p>Reference:</p>
-    <a href="https://en.wikipedia.org/wiki/Referential_integrity">Referential integrity in wikipedia</a>
 </section>
 <section id="foreign_key"><h2>FOREIGN KEY constraints</h2>
-    <section><h3>Definition</h3>
-        <dl class="fa">
-            <dt>A <span class="keyword">FOREIGN KEY</span> in one table points to a PRIMARY KEY in another table.</dt>
+    <section><h3>What is a FOREIGN KEY?</h3>
+        <dl class="fa fs-small">
+            <dt>A FOREIGN KEY in one table points to a PRIMARY KEY in another table.</dt>
+            <dt>FOREIGN KEY relationships involve a <a href="/ProgressBG-MySQL/pages/themes/beginners/Appendix/Appendix.html#parent_child_tables">parent table</a> that holds the central data values, and a <a href="/ProgressBG-MySQL/pages/themes/beginners/Appendix/Appendix.html#parent_child_tables">child table</a> with identical values pointing back to its parent.</dt>
+            <dt>The FOREIGN KEY clause is specified in the child table. The parent and child tables must use the same storage engine. They must not be TEMPORARY tables.</dt>
         </dl>
-    </section>
-    <section><h3>Examples</h3>
         <pre><code>
 CREATE TABLE author (
     id SMALLINT(3) UNSIGNED NOT NULL AUTO_INCREMENT,
-    fname VARCHAR(250) DEFAULT NULL,
-    lname VARCHAR(250) NOT NULL,
-    birth_year SMALLINT(4) DEFAULT NULL,
-    death_year SMALLINT(4) DEFAULT NULL,
-    PRIMARY KEY(id)
+    ...
 );
         </code></pre>
         <pre><code>
 CREATE TABLE book (
     id SMALLINT(3) UNSIGNED NOT NULL AUTO_INCREMENT,
     author_id SMALLINT(3) UNSIGNED NOT NULL,
-    book_name VARCHAR(250) NOT NULL UNIQUE,
-    pub_year SMALLINT(4) UNSIGNED DEFAULT NULL,
-    PRIMARY KEY(id)
+    ...
 );
         </code></pre>
-        <p><span class="note">book.author_id</span> is a Foreign Key in <span class="note">book</span> table</p>
+        <p><span class="code">book.author_id</span> will be used as a FOREIGN KEY to <span class="code">author.id</span></p>
+    </section>
+    <section><h3>FOREIGN KEY Constraint</h3>
+        <p>Ensure the <span class="keyword"><a href="/ProgressBG-MySQL/pages/themes/beginners/Appendix/Appendix.html#referential_integrity">referential integrity</a></span> of the data in one table to match values in another table</p>
+        <p>MySQL supports FOREIGN KEY Constraint only for <a href="http://dev.mysql.com/doc/refman/5.7/en/using-innodb-tables.html">InnoDB tables</a></p>
+    </section>
+    <section><h3>FOREIGN KEY Constraint</h3>
+        <p>The syntax</p>
+        <pre><code class="fs-big bash">
+[CONSTRAINT constraint_name]
+FOREIGN KEY [fk_name] (index_columns)
+  REFERENCES tbl_name (index_columns)
+  [ON DELETE action]
+  [ON UPDATE action]
+  [MATCH FULL | MATCH PARTIAL | MATCH SIMPLE]
+        </code></pre>
+        <dl class="fa fs-small">
+            <dt>The CONSTRAINT clause, if given, supplies a name for the foreign key constraint. If you omit it, InnoDB creates a name.</dt>
+            <dt>FOREIGN KEY indicates the indexed columns in the child table that must match index values in the parent table. fk_name is the foreign key ID. If given, it is ignored unless InnoDB automatically creates an index for the foreign key; in that case, fk_name becomes the index name.</dt>
+            <dt>REFERENCES names the parent table and the index columns in that table to which the foreign key in the child table refers. The index_columns part of the REFERENCES clause must have the same number of columns as the index_columns that follows the FOREIGN KEY keywords.</dt>
+
+        </dl>
+    </section>
+    <section><h3>FOREIGN KEY Constraint: ON DELETE</h3>
+        <dl class="fa fs-small">
+            <dt>ON DELETE specifies what happens to the child table when parent table rows are deleted.</dt>
+                <dd>For MySQL InnoDB tables ON DELETE NO ACTION and ON DELETE RESTRICT are the same as omitting the ON DELETE clause, as the foreign key constraints are checked immediately.</dd>
+                <dd>ON DELETE CASCADE causes matching child rows to be deleted when the corresponding parent row is deleted. In essence, the effect of the delete is cascaded from the parent to the child. This enables you to perform multiple-table deletes by deleting rows only from the parent table and letting InnoDB delete the corresponding rows from the child table.</dd>
+                <dd>ON DELETE SET NULL causes index columns in matching child rows to be set to NULL when the parent row is deleted. If you use this option, all the indexed child table columns named in the foreign key definition must be defined to permit NULL values</dd>
+        </dl>
+    </section>
+    <section><h3>FOREIGN KEY Constraint: ON UPDATE</h3>
+        <dl class="fa fs-small">
+            <dt>ON UPDATE enables you to specify what happens to the child table when parent table rows are updated.</dt>
+            <dt>If ON UPDATE clause is not present, the default behaviour is to reject any inserts or updates in the child table that result in foreign key values that don’t have any match in the parent table index, and to prevent updates to parent table index values to which child rows point. </dt>
+            <dt>The possible action values are the same as for ON DELETE and have similar effects.</dt>
+        </dl>
+    </section>
+    <section><h3>FOREIGN KEY Constraint: Guidelines</h3>
+        <dl class="fa fs-small">
+            <dt>You must create the parent table index explicitly before defining the foreign key relationship.</dt>
+            <dt>InnoDB automatically creates an index on foreign key columns (the referencing columns) in the child table if the CREATE TABLE statement does not include such an index.</dt>
+            <dd>The automatically created index will be a <span class="note">non unique</span> index and will include only the foreign key columns.</dd>
+            <dd>You should define the index in the child table explicitly if you want it to be a PRIMARY KEY or UNIQUE index, or if it should include other columns in addition to those in the foreign key.</dd>
+            <dt>Corresponding columns in the parent and child indexes must have compatible types.</dt>
+                <dd>Corresponding <span class="note">character columns</span> must be <span class="note">the same length</span>.</dd>
+                <dd>Corresponding <span class="note">integer columns</span> must have <span class="note">the same size</span> and <span class="note">same range</span> (signed or unsigned).</dd>
+            <dt>For string columns, you must index the entire column, not just a leading prefix of it.</dt>
+        </dl>
+    </section>
+    <section><h3>FOREIGN KEY Constraint: Examples</h3>
+        <dl class="fa fs-small">
+            <dt>books_db schema</dt>
+                <dd><a href="slides_examples/books_db_schema.sql.txt">View</a> or <a href="slides_examples/books_db_schema.sql">Download</a></dd>
+            <dt>books_db sample data</dt>
+                <dd><a href="slides_examples/books_db_sample_data.sql.txt">View</a> or <a href="slides_examples/books_db_sample_data.sql">Download</a></dd>
+            <dt>Now let's delete an author from the <span class="code">author</span> table:</dt>
+            <pre><code class="SQL">
+DELETE FROM author WHERE lname='Vonnegut' and fname='Kurt';
+            </code></pre>
+            <dt>And check what happens with the books in <span class="code">book</span> table:</dt>
+            <pre><code>
+SELECT author.fname, author.lname, book_name FROM book, author WHERE book.author_id=author.id;
+            </code></pre>
+            <p>Yes, we see (<a href="slides_examples/books_db_results_on_delete_constraint.txt">view</a>) that all Vonnegut's books records are automatically deleted from <span class="code">book</span> table, because of the constraint we've set.</p>
+        </dl>
+    </section>
+    <section><h3>FOREIGN KEY Constraint: Exercises</h3>
+        <dl class="fa fs-small">
+            <dt>Create the next <a href="slides_examples/books_db_schema.sql">books_db schema</a> and insert the <a href="slides_examples/books_db_sample_data.sql">books_db sample data</a></dt>
+            <dt>Set <span class="note">ON UPDATE</span> constraint on <span class="code">fk_AuthorID</span> which will force the MySQL to automatically update all rows in <span class="code">book</span> table, when a corresponding row in <span class="code">author</span> table has changed.</dt>
+            <dt>Set the <span class="code">author.id</span> to be 100 for Charles Dodgson author row.</dt>
+            <dt>Check what happens with <span class="code">author_id</span> in the respective rows in <span class="code">book</span> table.</dt>
+        </dl>
     </section>
 </section>
+
 <section id="foreign_key_constraints">
     <a href="http://www.w3schools.com/sql/sql_foreignkey.asp">w3schools: SQL FOREIGN KEY Constraint</a>
 </section>

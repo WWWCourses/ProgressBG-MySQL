@@ -3,6 +3,7 @@ window.onload = function(){
 }
 function init(){
     var sub_themes_nodes = document.getElementsByClassName('iep_syllabus_sub_themes');
+    console.log("INIT");
     attachEvents();
     calcTotalHours();
     calcTotalDays();
@@ -14,6 +15,7 @@ function attachEvents(){
     for (var i = 0; i < elementList.length; i++) {
         var element = elementList[i];
         element.addEventListener( "click", function(){
+            console.log("addEventListener:"+element);
             showHideNode(this.nextElementSibling)
         });
     };
@@ -65,7 +67,7 @@ function hideAllNodes ( effected_nodes){
     };
 }
 function showHideNode(effected_node){
-    // console.log('showHideNode - effected_node:'+effected_node);
+    console.log('showHideNode - effected_node:'+effected_node);
     if ( effected_node.style.display == 'none'){
         showNode(effected_node);
         effected_node.previousElementSibling.title = 'Hide Subtopics';

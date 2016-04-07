@@ -1,0 +1,36 @@
+mysql root@localhost:books_db> SELECT author.fname, author.lname, book_name FROM book, author WHERE book.author_id=author.id;
++---------+---------+-------------------------------------------------------------------------------------------------------------------------+
+| fname   | lname   | book_name                                                                                                               |
+|---------+---------+-------------------------------------------------------------------------------------------------------------------------|
+| Douglas | Adams   | The Hitchhiker's Guide to the Galaxy                                                                                    |
+| Douglas | Adams   | The Restaurant at the End of the Universe                                                                               |
+| Douglas | Adams   | Life                                                                                                                    |
+| Douglas | Adams   | So Long                                                                                                                 |
+| Douglas | Adams   | Young Zaphod Plays It Safe                                                                                              |
+| Douglas | Adams   | Dirk Gently's Holistic Detective Agency                                                                                 |
+| Douglas | Adams   | The Long Dark Tea                                                                                                       |
+| Douglas | Adams   | Last Chance to See                                                                                                      |
+| Douglas | Adams   | Mostly Harmless                                                                                                         |
+| Charles | Dodgson | Alice's Adventures in Wonderland                                                                                        |
+| Charles | Dodgson | Through the Looking-Glass, and What Alice Found There                                                                   |
+| Charles | Dodgson | Rhyme? And Reason?                                                                                                      |
+| Charles | Dodgson | A Tangled Tale                                                                                                          |
+| Charles | Dodgson | Pillow Problems                                                                                                         |
+| Charles | Dodgson | La Guida di Bragia, a Ballad Opera for the Marionette Theatre                                                           |
+| Charles | Dodgson | Sylvie and Bruno                                                                                                        |
+| Charles | Dodgson | Sylvie and Bruno Concluded                                                                                              |
+| Charles | Dodgson | Three Sunsets and Other Poems                                                                                           |
+| Charles | Dodgson | The Hunting of the Snark                                                                                                |
+| Charles | Dodgson | What the Tortoise Said to Achilles                                                                                      |
+| Charles | Dodgson | A Syllabus of Plane Algebraic Geometry                                                                                  |
+| Charles | Dodgson | The Fifth Book of Euclid Treated Algebraically                                                                          |
+| Charles | Dodgson | An Elementary Treatise on Determinants, With Their Application to Simultaneous Linear Equations and Algebraic Equations |
+| Charles | Dodgson | Euclid and his Modern Rivals                                                                                            |
+| Charles | Dodgson | Symbolic Logic Part I                                                                                                   |
+| Charles | Dodgson | Symbolic Logic Part II                                                                                                  |
+| Charles | Dodgson | The Alphabet Cipher                                                                                                     |
+| Charles | Dodgson | The Game of Logic                                                                                                       |
+| Charles | Dodgson | Curiosa Mathematica I                                                                                                   |
+| Charles | Dodgson | Curiosa Mathematica II                                                                                                  |
++---------+---------+-------------------------------------------------------------------------------------------------------------------------+
+30 rows in set

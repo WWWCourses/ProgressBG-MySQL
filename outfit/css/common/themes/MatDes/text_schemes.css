@@ -47,6 +47,9 @@
     color: #C5E1A5;
     font-style: italic;
 }
+.reveal .keyword{
+    color: #C5E1A5;
+}
 .reveal .newterm{
     color: #C5E1A5;
     font-weight: bold;
@@ -70,6 +73,10 @@
 }
 .reveal .fs-small{
     font-size: .8em;
+    line-height: 1.2;
+}
+.reveal .fs-normal{
+    font-size: 1em;
     line-height: 1.2;
 }
 .reveal .fs-big{
