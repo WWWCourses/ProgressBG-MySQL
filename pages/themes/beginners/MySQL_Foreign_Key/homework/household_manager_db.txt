@@ -1,4 +1,4 @@
-Create DB: household_manager_db
+Create DB: household_db
 
 Create next tables but fill the commented parts (starting with '#') where specified:
     table: family_member
