@@ -36,6 +36,7 @@ function calcTotalDays(){
     for (var i = 0; i < hours_nodes.length; i++) {
         var theme_hours = parseInt(hours_nodes[i].innerHTML || 0); // cause of NaN
         current_hours += theme_hours;
+
         // calculate current days and show it as tooltip
         var current_days = Math.round( current_hours / 4 );
         hours_nodes[i].title = "day:" + current_days;
