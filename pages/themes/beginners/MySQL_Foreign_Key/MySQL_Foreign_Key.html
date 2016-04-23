@@ -169,15 +169,15 @@ FOREIGN KEY [fk_name] (index_columns)
   [MATCH FULL | MATCH PARTIAL | MATCH SIMPLE]
         </code></pre>
         <dl class="fa fs-small">
-            <dt>The CONSTRAINT clause, if given, supplies a name for the foreign key constraint. If you omit it, InnoDB creates a name.</dt>
-            <dt>FOREIGN KEY indicates the indexed columns in the child table that must match index values in the parent table. fk_name is the foreign key ID. If given, it is ignored unless InnoDB automatically creates an index for the foreign key; in that case, fk_name becomes the index name.</dt>
-            <dt>REFERENCES names the parent table and the index columns in that table to which the foreign key in the child table refers. The index_columns part of the REFERENCES clause must have the same number of columns as the index_columns that follows the FOREIGN KEY keywords.</dt>
+            <dt>The <span class="note">CONSTRAINT</span> clause, if given, supplies a name for the foreign key constraint. If you omit it, InnoDB creates a name.</dt>
+            <dt><span class="note">FOREIGN KEY</span> indicates the indexed columns in the child table that must match index values in the parent table. fk_name is the foreign key ID. If given, it is ignored unless InnoDB automatically creates an index for the foreign key; in that case, fk_name becomes the index name.</dt>
+            <dt>REFERENCES names the parent table and the index columns in that table to which the foreign key in the child table refers. The index_columns part of the REFERENCES clause must have the same number of columns as the index_columns that follows the <span class="note">FOREIGN KEY</span> keywords.</dt>
 
         </dl>
     </section>
-    <section><h3>FOREIGN KEY Constraint: ON DELETE</h3>
+    <section><h3>FOREIGN KEY Constraint: <span class="note">ON DELETE</span></h3>
         <dl class="fa fs-small">
-            <dt>ON DELETE specifies what happens to the child table when parent table rows are deleted.</dt>
+            <dt><span class="note">ON DELETE</span> specifies what happens to the child table when parent table rows are deleted.</dt>
                 <dd>For MySQL InnoDB tables ON DELETE NO ACTION and ON DELETE RESTRICT are the same as omitting the ON DELETE clause, as the foreign key constraints are checked immediately.</dd>
                 <dd>ON DELETE CASCADE causes matching child rows to be deleted when the corresponding parent row is deleted. In essence, the effect of the delete is cascaded from the parent to the child. This enables you to perform multiple-table deletes by deleting rows only from the parent table and letting InnoDB delete the corresponding rows from the child table.</dd>
                 <dd>ON DELETE SET NULL causes index columns in matching child rows to be set to NULL when the parent row is deleted. If you use this option, all the indexed child table columns named in the foreign key definition must be defined to permit NULL values</dd>
